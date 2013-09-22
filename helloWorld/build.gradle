@@ -1,0 +1,25 @@
+import javax.swing.JOptionPane
+
+apply plugin : 'java'
+
+repositories{
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.+'
+    compile 'org.apache.commons:commons-lang3:+'
+}
+
+task alert << {
+
+    if(JOptionPane.showConfirmDialog(null, "Do you want to execute the test????") != 0)
+        test.enabled= false
+
+
+}
+compileJava.dependsOn alert
+
+test.doFirst{
+    println("Let's test!!")
+}
